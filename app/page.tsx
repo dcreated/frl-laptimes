@@ -1,5 +1,7 @@
 'use client'
 
+export const dynamic = 'force-dynamic'
+
 import { useEffect, useRef, useState, useCallback } from 'react'
 import { supabase, Session } from '@/lib/supabase'
 import { parseCsvText, laptimeToMs, formatGap, LapEntry } from '@/lib/parseCsv'

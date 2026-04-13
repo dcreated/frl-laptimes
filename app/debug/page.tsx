@@ -58,7 +58,7 @@ function DebugContent() {
   if (unauthorized) {
     return (
       <div className="min-h-screen flex items-center justify-center">
-        <p className="text-red-600 font-medium">Geen toegang. Controleer de ?key= parameter.</p>
+        <p className="text-red-600 font-medium">Access denied. Check the ?key= parameter.</p>
       </div>
     )
   }
@@ -81,15 +81,15 @@ function DebugContent() {
         </h1>
         <div className="flex items-center gap-4">
           <span className="text-xs text-[var(--fg-muted)]">
-            Vernieuwd: {lastRefresh.toLocaleTimeString('nl-NL')}
+            Refreshed: {lastRefresh.toLocaleTimeString('en-GB')}
           </span>
-          <a href="/" className="text-sm text-[var(--fg-muted)] hover:text-[var(--fg)]">← Terug</a>
+          <a href="/" className="text-sm text-[var(--fg-muted)] hover:text-[var(--fg)]">← Back</a>
         </div>
       </div>
 
       {/* Supabase status */}
       <div className="border border-[var(--border)] bg-[var(--bg-card)] rounded p-4 mb-6">
-        <h2 className="text-xs uppercase tracking-wider text-[var(--fg-muted)] mb-3">Supabase verbinding</h2>
+        <h2 className="text-xs uppercase tracking-wider text-[var(--fg-muted)] mb-3">Supabase connection</h2>
         <div className="flex items-center gap-2">
           <div
             className="w-2.5 h-2.5 rounded-full"
@@ -98,7 +98,7 @@ function DebugContent() {
             }}
           />
           <span className="text-sm font-medium">
-            {supabaseOk === null ? 'Controleren...' : supabaseOk ? 'Verbonden' : 'Niet bereikbaar'}
+            {supabaseOk === null ? 'Checking...' : supabaseOk ? 'Connected' : 'Unreachable'}
           </span>
         </div>
       </div>
@@ -106,16 +106,16 @@ function DebugContent() {
       {/* Recent uploads */}
       <div className="border border-[var(--border)] bg-[var(--bg-card)] rounded p-4 mb-6">
         <h2 className="text-xs uppercase tracking-wider text-[var(--fg-muted)] mb-3">
-          Laatste 5 upload pogingen
+          Last 5 upload attempts
         </h2>
         {uploadEntries.length === 0 ? (
-          <p className="text-sm text-[var(--fg-muted)]">Geen upload activiteit gevonden.</p>
+          <p className="text-sm text-[var(--fg-muted)]">No upload activity found.</p>
         ) : (
           <div className="space-y-2">
             {uploadEntries.map((e, i) => (
               <div key={i} className="flex gap-3 text-sm">
                 <span className="font-mono-time text-[var(--fg-muted)] shrink-0 text-xs">
-                  {new Date(e.timestamp).toLocaleTimeString('nl-NL')}
+                  {new Date(e.timestamp).toLocaleTimeString('en-GB')}
                 </span>
                 <span style={{ color: levelColor[e.level] }}>{e.message}</span>
               </div>
@@ -127,17 +127,17 @@ function DebugContent() {
       {/* Full log */}
       <div className="border border-[var(--border)] bg-[var(--bg-card)] rounded p-4">
         <h2 className="text-xs uppercase tracking-wider text-[var(--fg-muted)] mb-3">
-          Log ({entries.length} regels, auto-vernieuwd elke 5s)
+          Log ({entries.length} entries, auto-refreshed every 5s)
         </h2>
         <div className="overflow-auto max-h-[500px] rounded bg-[var(--bg)] p-3">
           {entries.length === 0 ? (
-            <p className="text-sm text-[var(--fg-muted)] font-mono-time">— leeg —</p>
+            <p className="text-sm text-[var(--fg-muted)] font-mono-time">— empty —</p>
           ) : (
             <div className="space-y-0.5">
               {[...entries].reverse().map((e, i) => (
                 <div key={i} className="flex gap-3 text-xs font-mono-time leading-5">
                   <span className="text-[var(--fg-muted)] shrink-0 w-24">
-                    {new Date(e.timestamp).toLocaleTimeString('nl-NL')}
+                    {new Date(e.timestamp).toLocaleTimeString('en-GB')}
                   </span>
                   <span
                     className="w-12 shrink-0 uppercase"
@@ -158,7 +158,7 @@ function DebugContent() {
 
 export default function DebugPage() {
   return (
-    <Suspense fallback={<div className="min-h-screen flex items-center justify-center text-[var(--fg-muted)] text-sm">Laden...</div>}>
+    <Suspense fallback={<div className="min-h-screen flex items-center justify-center text-[var(--fg-muted)] text-sm">Loading...</div>}>
       <DebugContent />
     </Suspense>
   )

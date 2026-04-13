@@ -25,7 +25,7 @@ export default function RootLayout({
   children: React.ReactNode
 }) {
   return (
-    <html lang="nl" className={`${barlowCondensed.variable} ${dmMono.variable}`}>
+    <html lang="en" className={`${barlowCondensed.variable} ${dmMono.variable}`}>
       <body className="bg-[var(--bg)] text-[var(--fg)] min-h-screen">
         {children}
       </body>

@@ -49,7 +49,7 @@ export default function UploadPage() {
         .from('laptimes-csv')
         .upload(filePath, file, { contentType: 'text/csv', upsert: false })
 
-      if (uploadError) throw new Error(`Upload mislukt: ${uploadError.message}`)
+      if (uploadError) throw new Error(`Upload failed: ${uploadError.message}`)
 
       setProgress(70)
 
@@ -59,7 +59,7 @@ export default function UploadPage() {
         file_path: filePath,
       })
 
-      if (dbError) throw new Error(`Database fout: ${dbError.message}`)
+      if (dbError) throw new Error(`Database error: ${dbError.message}`)
 
       setProgress(100)
       setSuccess(true)
@@ -68,7 +68,7 @@ export default function UploadPage() {
       setFile(null)
       if (fileRef.current) fileRef.current.value = ''
     } catch (err) {
-      setError(err instanceof Error ? err.message : 'Onbekende fout')
+      setError(err instanceof Error ? err.message : 'Unknown error')
     } finally {
       setUploading(false)
     }
@@ -84,7 +84,7 @@ export default function UploadPage() {
           <form onSubmit={handleAuth} className="flex flex-col gap-4">
             <div>
               <label className="block text-xs uppercase tracking-wider text-[var(--fg-muted)] mb-1">
-                Wachtwoord
+                Password
               </label>
               <input
                 type="password"
@@ -95,14 +95,14 @@ export default function UploadPage() {
               />
             </div>
             {authError && (
-              <p className="text-sm text-red-600">Onjuist wachtwoord.</p>
+              <p className="text-sm text-red-600">Incorrect password.</p>
             )}
             <button
               type="submit"
               className="px-4 py-2 rounded text-white text-sm font-medium"
               style={{ background: 'var(--accent)' }}
             >
-              Inloggen
+              Log in
             </button>
           </form>
         </div>
@@ -118,24 +118,24 @@ export default function UploadPage() {
             <span style={{ color: 'var(--accent)' }}>FRL</span> Upload CSV
           </h1>
           <a href="/" className="text-sm text-[var(--fg-muted)] hover:text-[var(--fg)] transition-colors">
-            ← Terug
+            ← Back
           </a>
         </div>
 
         {success ? (
           <div className="text-center py-6">
             <div className="text-4xl mb-3">✓</div>
-            <p className="font-semibold mb-2">Upload geslaagd!</p>
-            <p className="text-sm text-[var(--fg-muted)] mb-6">De CSV is opgeslagen en de sessie is aangemaakt.</p>
+            <p className="font-semibold mb-2">Upload successful!</p>
+            <p className="text-sm text-[var(--fg-muted)] mb-6">The CSV has been saved and the session has been created.</p>
             <div className="flex gap-3 justify-center">
               <a href="/" className="px-4 py-2 rounded text-white text-sm font-medium" style={{ background: 'var(--accent)' }}>
-                Bekijk leaderboard
+                View leaderboard
               </a>
               <button
                 onClick={() => setSuccess(false)}
                 className="px-4 py-2 rounded text-sm font-medium border border-[var(--border)]"
               >
-                Nog een upload
+                Upload another
               </button>
             </div>
           </div>
@@ -143,13 +143,13 @@ export default function UploadPage() {
           <form onSubmit={handleUpload} className="flex flex-col gap-5">
             <div>
               <label className="block text-xs uppercase tracking-wider text-[var(--fg-muted)] mb-1">
-                Sessienaam <span className="text-red-500">*</span>
+                Session name <span className="text-red-500">*</span>
               </label>
               <input
                 type="text"
                 value={sessionName}
                 onChange={e => setSessionName(e.target.value)}
-                placeholder="bijv. Race 1 — Spa"
+                placeholder="e.g. Race 1 — Spa"
                 required
                 className="w-full border border-[var(--border)] bg-[var(--bg)] rounded px-3 py-2 text-sm focus:outline-none focus:border-[var(--accent)]"
               />
@@ -157,20 +157,20 @@ export default function UploadPage() {
 
             <div>
               <label className="block text-xs uppercase tracking-wider text-[var(--fg-muted)] mb-1">
-                Circuit
+                Track
               </label>
               <input
                 type="text"
                 value={trackName}
                 onChange={e => setTrackName(e.target.value)}
-                placeholder="bijv. Spa-Francorchamps"
+                placeholder="e.g. Spa-Francorchamps"
                 className="w-full border border-[var(--border)] bg-[var(--bg)] rounded px-3 py-2 text-sm focus:outline-none focus:border-[var(--accent)]"
               />
             </div>
 
             <div>
               <label className="block text-xs uppercase tracking-wider text-[var(--fg-muted)] mb-1">
-                CSV bestand <span className="text-red-500">*</span>
+                CSV file <span className="text-red-500">*</span>
               </label>
               <input
                 ref={fileRef}
@@ -187,7 +187,7 @@ export default function UploadPage() {
             {uploading && (
               <div>
                 <div className="flex justify-between text-xs text-[var(--fg-muted)] mb-1">
-                  <span>Uploaden...</span>
+                  <span>Uploading...</span>
                   <span>{progress}%</span>
                 </div>
                 <div className="h-1.5 rounded-full bg-[var(--border)] overflow-hidden">
@@ -211,7 +211,7 @@ export default function UploadPage() {
               className="px-4 py-2 rounded text-white text-sm font-medium disabled:opacity-50 disabled:cursor-not-allowed transition-opacity"
               style={{ background: 'var(--accent)' }}
             >
-              {uploading ? 'Bezig met uploaden...' : 'Upload CSV'}
+              {uploading ? 'Uploading...' : 'Upload CSV'}
             </button>
           </form>
         )}

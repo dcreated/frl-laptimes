@@ -83,7 +83,7 @@ export default function Home() {
         setSessions(data ?? [])
         if (data && data.length > 0) setActiveSession(data[0])
       } catch (err) {
-        setError('Fout bij laden van sessies.')
+        setError('Failed to load sessions.')
         console.error(err)
       } finally {
         setSessionsLoading(false)
@@ -114,7 +114,7 @@ export default function Home() {
         const parsed = parseCsvText(text)
         setEntries(parsed)
       } catch (err) {
-        setError('Fout bij laden van laptimes.')
+        setError('Failed to load lap times.')
         console.error(err)
       } finally {
         setLoading(false)
@@ -231,7 +231,7 @@ export default function Home() {
       {sessionsLoading ? (
         <div className="h-10 rounded bg-[var(--border)] animate-pulse mb-6 w-full max-w-md" />
       ) : sessions.length === 0 ? (
-        <p className="text-[var(--fg-muted)] mb-6">Nog geen sessies beschikbaar. <a href="/upload" className="underline">Upload een CSV</a>.</p>
+        <p className="text-[var(--fg-muted)] mb-6">No sessions available yet. <a href="/upload" className="underline">Upload a CSV</a>.</p>
       ) : (
         <>
           {/* Mobile: dropdown */}
@@ -285,14 +285,14 @@ export default function Home() {
             </svg>
             <input
               type="text"
-              placeholder="Zoek rijdersnaam..."
+              placeholder="Search driver name..."
               value={searchQuery}
               onChange={e => handleSearch(e.target.value)}
               className="w-full pl-9 pr-3 py-2 rounded border border-[var(--border)] bg-[var(--bg-card)] text-sm focus:outline-none focus:border-[var(--accent)] transition-colors"
             />
           </div>
           {searchNoMatch && (
-            <span className="text-sm text-[var(--fg-muted)]">Geen rijder gevonden</span>
+            <span className="text-sm text-[var(--fg-muted)]">No driver found</span>
           )}
         </div>
       )}
@@ -302,19 +302,19 @@ export default function Home() {
         <div className="grid grid-cols-3 gap-3 mb-6">
           {[
             {
-              label: 'Snelste tijd',
+              label: 'Fastest lap',
               value: fastest?.laptime ?? '—',
               mono: true,
               accent: true,
             },
             {
-              label: 'Snelste rijder',
+              label: 'Fastest driver',
               value: fastest?.name ?? '—',
               mono: false,
               accent: false,
             },
             {
-              label: 'Totaal ritten',
+              label: 'Total entries',
               value: entries.length > 0 ? String(entries.length) : '—',
               mono: true,
               accent: false,
@@ -350,13 +350,13 @@ export default function Home() {
               <thead className="border-b border-[var(--border)]">
                 <tr>
                   <SortHeader col="pos" label="#" />
-                  <SortHeader col="name" label="Naam" />
+                  <SortHeader col="name" label="Name" />
                   <th
                     className="px-3 py-3 text-left text-xs font-semibold uppercase tracking-wider cursor-pointer select-none whitespace-nowrap"
                     style={{ color: sortKey === 'car' ? 'var(--accent)' : 'var(--fg-muted)' }}
                     onClick={() => handleSort('car')}
                   >
-                    Auto{sortKey === 'car' && <span className="ml-1">{sortDir === 'asc' ? '↑' : '↓'}</span>}
+                    Car{sortKey === 'car' && <span className="ml-1">{sortDir === 'asc' ? '↑' : '↓'}</span>}
                   </th>
                   <SortHeader col="laptime" label="Laptime" />
                   <SortHeader col="gap" label="Gap" />
@@ -432,7 +432,7 @@ export default function Home() {
       )}
 
       {!loading && !sessionsLoading && entries.length === 0 && activeSession && !error && (
-        <p className="text-[var(--fg-muted)] text-sm">Geen laptimes gevonden voor deze sessie.</p>
+        <p className="text-[var(--fg-muted)] text-sm">No lap times found for this session.</p>
       )}
     </div>
   )

@@ -1,0 +1,21 @@
+{
+  "name": "FRL Laptimes",
+  "short_name": "FRL",
+  "description": "Formula Racing League — Sim racing at its very best!",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#111111",
+  "theme_color": "#111111",
+  "icons": [
+    {
+      "src": "/apple-touch-icon.png",
+      "sizes": "180x180",
+      "type": "image/png"
+    },
+    {
+      "src": "/frl-logo.png",
+      "sizes": "600x600",
+      "type": "image/png"
+    }
+  ]
+}

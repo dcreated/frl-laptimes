@@ -17,6 +17,15 @@ const dmMono = DM_Mono({
 export const metadata: Metadata = {
   title: 'FRL Laptimes — Sim racing at its very best!',
   description: 'Formula Racing League — official laptime leaderboard',
+  appleWebApp: {
+    capable: true,
+    title: 'FRL Laptimes',
+    statusBarStyle: 'black-translucent',
+  },
+  icons: {
+    apple: '/apple-touch-icon.png',
+  },
+  manifest: '/manifest.json',
 }
 
 export default function RootLayout({

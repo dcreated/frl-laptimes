@@ -15,8 +15,8 @@ const dmMono = DM_Mono({
 })
 
 export const metadata: Metadata = {
-  title: 'FRL Laptimes',
-  description: 'FRL Sim Racing Leaderboard',
+  title: 'FRL Laptimes — Sim racing at its very best!',
+  description: 'Formula Racing League — official laptime leaderboard',
 }
 
 export default function RootLayout({

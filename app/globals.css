@@ -8,9 +8,11 @@
   --fg: #111111;
   --fg-muted: #6b7280;
   --border: #e5e7eb;
-  --accent: #E24B4A;
-  --accent-subtle: rgba(226, 75, 74, 0.04);
-  --accent-highlight: rgba(226, 75, 74, 0.08);
+  --accent: #E8305A;
+  --accent-blue: #2563EB;
+  --accent-subtle: rgba(232, 48, 90, 0.04);
+  --accent-highlight: rgba(232, 48, 90, 0.08);
+  --frl-gradient: linear-gradient(to right, #E8305A, #7B4BC8);
 }
 
 @media (prefers-color-scheme: dark) {
@@ -20,9 +22,11 @@
     --fg: #f0f0f0;
     --fg-muted: #9ca3af;
     --border: #2d2d2d;
-    --accent: #E24B4A;
-    --accent-subtle: rgba(226, 75, 74, 0.06);
-    --accent-highlight: rgba(226, 75, 74, 0.12);
+    --accent: #E8305A;
+    --accent-blue: #3B82F6;
+    --accent-subtle: rgba(232, 48, 90, 0.06);
+    --accent-highlight: rgba(232, 48, 90, 0.12);
+    --frl-gradient: linear-gradient(to right, #E8305A, #7B4BC8);
   }
 }
 
@@ -107,6 +111,21 @@ body {
 /* Default: hide inline pill (overridden to block in compact media query) */
 .car-inline {
   display: none;
+}
+
+/* FRL active session tab */
+.frl-tab-active {
+  background: var(--frl-gradient) !important;
+  border-color: transparent !important;
+  color: #fff !important;
+}
+
+/* FRL gradient text */
+.frl-gradient-text {
+  background: var(--frl-gradient);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
 }
 
 /* Name cell inner layout — active in compact mode via .name-cell-inner */

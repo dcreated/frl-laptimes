@@ -225,15 +225,43 @@ export default function Home() {
   }
 
   return (
-    <div className="max-w-7xl mx-auto px-4 py-6">
+    <div className="max-w-7xl mx-auto px-4 pt-5 pb-6">
       {/* Header */}
-      <header className="flex items-center justify-between mb-6">
-        <h1 className="text-3xl font-bold uppercase tracking-wide" style={{ fontFamily: 'var(--font-barlow, sans-serif)' }}>
-          <span style={{ color: 'var(--accent)' }}>FRL</span> Laptimes
-        </h1>
-        <a href="/upload" className="text-sm px-3 py-1.5 rounded border border-[var(--border)] hover:border-[var(--accent)] transition-colors">
-          Upload CSV
-        </a>
+      <header className="mb-0">
+        <div className="flex items-center justify-between py-2">
+          {/* Logo + wordmark */}
+          <div className="flex items-center gap-3">
+            <div className="w-14 h-14 rounded-full overflow-hidden flex-shrink-0 bg-black ring-1 ring-white/10">
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img src="/frl-logo.png" alt="FRL logo" className="w-full h-full object-cover" />
+            </div>
+            <div>
+              <h1
+                className="text-3xl font-bold uppercase tracking-wide leading-none"
+                style={{ fontFamily: 'var(--font-barlow, sans-serif)' }}
+              >
+                <span className="frl-gradient-text">FRL</span>
+                <span className="ml-1.5">Laptimes</span>
+              </h1>
+              <p
+                className="text-xs tracking-widest uppercase mt-1"
+                style={{ color: 'var(--fg-muted)', fontFamily: 'var(--font-barlow, sans-serif)' }}
+              >
+                Sim racing at its very best!
+              </p>
+            </div>
+          </div>
+
+          <a
+            href="/upload"
+            className="text-sm px-3 py-1.5 rounded border border-[var(--border)] hover:border-[var(--accent)] transition-colors flex-shrink-0"
+          >
+            Upload CSV
+          </a>
+        </div>
+
+        {/* FRL gradient separator */}
+        <div className="h-px mt-4 mb-6" style={{ background: 'var(--frl-gradient)' }} />
       </header>
 
       {/* Session tabs — desktop horizontal, mobile dropdown */}
@@ -265,12 +293,12 @@ export default function Home() {
               <button
                 key={s.id}
                 onClick={() => setActiveSession(s)}
-                className="px-4 py-2 rounded text-sm font-medium transition-colors border"
-                style={{
-                  background: activeSession?.id === s.id ? 'var(--accent)' : 'var(--bg-card)',
-                  color: activeSession?.id === s.id ? '#fff' : 'var(--fg)',
-                  borderColor: activeSession?.id === s.id ? 'var(--accent)' : 'var(--border)',
-                }}
+                className={`px-4 py-2 rounded text-sm font-medium transition-colors border ${activeSession?.id === s.id ? 'frl-tab-active' : ''}`}
+                style={activeSession?.id !== s.id ? {
+                  background: 'var(--bg-card)',
+                  color: 'var(--fg)',
+                  borderColor: 'var(--border)',
+                } : {}}
               >
                 {s.name}{s.track ? ` — ${s.track}` : ''}
               </button>

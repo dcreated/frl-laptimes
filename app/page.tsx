@@ -46,7 +46,12 @@ function SkeletonRow() {
   return (
     <tr className="border-b border-[var(--border)]">
       <td className="col-pos px-3 py-3"><div className="h-4 w-6 rounded bg-[var(--border)] animate-pulse" /></td>
-      <td className="col-name px-3 py-3"><div className="h-4 rounded bg-[var(--border)] animate-pulse" style={{ width: '120px' }} /></td>
+      <td className="col-name px-3 py-3">
+        <div className="name-cell-inner">
+          <div className="h-4 rounded bg-[var(--border)] animate-pulse name-text" style={{ width: '120px' }} />
+          <div className="car-inline h-4 w-16 rounded bg-[var(--border)] animate-pulse" />
+        </div>
+      </td>
       <td className="col-car px-3 py-3"><div className="h-4 w-16 rounded bg-[var(--border)] animate-pulse" /></td>
       <td className="col-laptime px-3 py-3"><div className="h-4 w-16 rounded bg-[var(--border)] animate-pulse" /></td>
       <td className="portrait-hidden px-3 py-3"><div className="h-4 w-14 rounded bg-[var(--border)] animate-pulse" /></td>
@@ -398,7 +403,10 @@ export default function Home() {
                           {entry.pos}
                         </td>
                         <td className="col-name px-3 py-3 font-medium" style={{ color: isHighlighted ? 'var(--accent)' : 'var(--fg)' }}>
-                          {entry.name}
+                          <div className="name-cell-inner">
+                            <span className="name-text">{entry.name}</span>
+                            <span className="car-inline"><CarPill car={entry.car} /></span>
+                          </div>
                         </td>
                         <td className="col-car px-3 py-3">
                           <CarPill car={entry.car} />

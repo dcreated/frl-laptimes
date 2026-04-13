@@ -42,42 +42,75 @@ body {
   }
 }
 
-/* ── Portrait mobile: fixed layout, only 4 columns ── */
+/* ── Portrait mobile: 3 columns — #, Name+Car stacked, Laptime ── */
 @media screen and (max-width: 767px) and (orientation: portrait) {
+  /* Hide secondary columns */
   .portrait-hidden {
     display: none !important;
   }
 
-  /* Fixed column widths so the 4 visible columns fill the screen */
+  /* Hide the standalone car column in portrait — car moves inline */
+  .col-car {
+    display: none !important;
+  }
+
+  /* Show the inline car pill (inside name cell) only in portrait */
+  .car-inline {
+    display: block !important;
+  }
+
+  /* Fixed 3-column layout fills the full screen width */
   .portrait-table {
     table-layout: fixed;
     width: 100%;
   }
-  .portrait-table .col-pos      { width: 36px; }
-  .portrait-table .col-name     { /* takes remaining space */ }
-  .portrait-table .col-car      { width: 88px; }
-  .portrait-table .col-laptime  { width: 84px; }
+  .portrait-table .col-pos     { width: 36px; }
+  .portrait-table .col-name    { /* auto — takes remaining width */ }
+  .portrait-table .col-laptime { width: 88px; }
 
-  /* Tighten cell padding in portrait */
+  /* Tighten cell padding */
   .portrait-table th,
   .portrait-table td {
     padding-left: 8px;
     padding-right: 8px;
   }
 
-  /* Truncate long names gracefully */
+  /* Name cell: clip overflow, let inner flex handle layout */
   .portrait-table .col-name {
+    overflow: hidden;
+    max-width: 0; /* required for text-overflow in table-fixed */
+  }
+
+  /* Name text truncates, car pill wraps below */
+  .name-cell-inner {
+    display: flex;
+    flex-direction: column;
+    gap: 3px;
+    overflow: hidden;
+  }
+  .name-cell-inner .name-text {
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
-    max-width: 0; /* forces text-overflow to work in table-fixed */
   }
 }
 
-/* ── Landscape mobile + everything wider: normal overflow scroll ── */
+/* ── Landscape mobile + tablet/desktop: all columns visible ── */
 @media screen and (orientation: landscape),
        screen and (min-width: 768px) {
   .portrait-hidden {
     display: table-cell !important;
   }
+  .col-car {
+    display: table-cell !important;
+  }
+  /* Hide the inline car pill — car is in its own column */
+  .car-inline {
+    display: none !important;
+  }
+}
+
+/* Default: hide car-inline (landscape/desktop default) */
+.car-inline {
+  display: none;
 }

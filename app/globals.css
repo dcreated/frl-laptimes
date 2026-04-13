@@ -1,0 +1,43 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --bg: #f5f5f5;
+  --bg-card: #ffffff;
+  --fg: #111111;
+  --fg-muted: #6b7280;
+  --border: #e5e7eb;
+  --accent: #E24B4A;
+  --accent-subtle: rgba(226, 75, 74, 0.04);
+  --accent-highlight: rgba(226, 75, 74, 0.08);
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg: #111111;
+    --bg-card: #1a1a1a;
+    --fg: #f0f0f0;
+    --fg-muted: #9ca3af;
+    --border: #2d2d2d;
+    --accent: #E24B4A;
+    --accent-subtle: rgba(226, 75, 74, 0.06);
+    --accent-highlight: rgba(226, 75, 74, 0.12);
+  }
+}
+
+body {
+  background: var(--bg);
+  color: var(--fg);
+  font-family: var(--font-barlow), 'Barlow Condensed', sans-serif;
+}
+
+.font-mono-time {
+  font-family: var(--font-dm-mono), 'DM Mono', monospace;
+}
+
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+}

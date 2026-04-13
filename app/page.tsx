@@ -54,7 +54,7 @@ function SkeletonRow() {
       </td>
       <td className="col-car px-3 py-3"><div className="h-4 w-16 rounded bg-[var(--border)] animate-pulse" /></td>
       <td className="col-laptime px-3 py-3"><div className="h-4 w-16 rounded bg-[var(--border)] animate-pulse" /></td>
-      <td className="portrait-hidden px-3 py-3"><div className="h-4 w-14 rounded bg-[var(--border)] animate-pulse" /></td>
+      <td className="col-gap px-3 py-3"><div className="h-4 w-12 rounded bg-[var(--border)] animate-pulse" /></td>
       <td className="portrait-hidden px-3 py-3"><div className="h-4 w-14 rounded bg-[var(--border)] animate-pulse" /></td>
       <td className="portrait-hidden px-3 py-3"><div className="h-4 w-14 rounded bg-[var(--border)] animate-pulse" /></td>
       <td className="portrait-hidden px-3 py-3"><div className="h-4 w-14 rounded bg-[var(--border)] animate-pulse" /></td>
@@ -368,7 +368,7 @@ export default function Home() {
                     Car{sortKey === 'car' && <span className="ml-1">{sortDir === 'asc' ? '↑' : '↓'}</span>}
                   </th>
                   <SortHeader col="laptime" label="Laptime" className="col-laptime" />
-                  <SortHeader col="gap" label="Gap" className="portrait-hidden" />
+                  <SortHeader col="gap" label="Gap" className="col-gap" />
                   <SortHeader col="splitOne" label="S1" className="portrait-hidden" />
                   <SortHeader col="splitTwo" label="S2" className="portrait-hidden" />
                   <SortHeader col="splitThree" label="S3" className="portrait-hidden" />
@@ -414,7 +414,7 @@ export default function Home() {
                         <td className="col-laptime px-3 py-3 font-mono-time">
                           {entry.laptime}
                         </td>
-                        <td className="portrait-hidden px-3 py-3 font-mono-time text-[var(--fg-muted)]">
+                        <td className="col-gap px-3 py-3 font-mono-time text-[var(--fg-muted)]">
                           {formatGap(gapMs)}
                         </td>
                         <td className="portrait-hidden px-3 py-3 font-mono-time"

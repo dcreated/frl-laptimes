@@ -66,7 +66,8 @@ body {
   }
   .portrait-table .col-pos     { width: 36px; }
   .portrait-table .col-name    { /* auto — takes remaining width */ }
-  .portrait-table .col-laptime { width: 88px; }
+  .portrait-table .col-laptime { width: 80px; }
+  .portrait-table .col-gap     { width: 56px; }
 
   /* Tighten cell padding */
   .portrait-table th,

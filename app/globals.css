@@ -41,3 +41,43 @@ body {
     text-wrap: balance;
   }
 }
+
+/* ── Portrait mobile: fixed layout, only 4 columns ── */
+@media screen and (max-width: 767px) and (orientation: portrait) {
+  .portrait-hidden {
+    display: none !important;
+  }
+
+  /* Fixed column widths so the 4 visible columns fill the screen */
+  .portrait-table {
+    table-layout: fixed;
+    width: 100%;
+  }
+  .portrait-table .col-pos      { width: 36px; }
+  .portrait-table .col-name     { /* takes remaining space */ }
+  .portrait-table .col-car      { width: 88px; }
+  .portrait-table .col-laptime  { width: 84px; }
+
+  /* Tighten cell padding in portrait */
+  .portrait-table th,
+  .portrait-table td {
+    padding-left: 8px;
+    padding-right: 8px;
+  }
+
+  /* Truncate long names gracefully */
+  .portrait-table .col-name {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    max-width: 0; /* forces text-overflow to work in table-fixed */
+  }
+}
+
+/* ── Landscape mobile + everything wider: normal overflow scroll ── */
+@media screen and (orientation: landscape),
+       screen and (min-width: 768px) {
+  .portrait-hidden {
+    display: table-cell !important;
+  }
+}

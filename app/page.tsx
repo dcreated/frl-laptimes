@@ -45,11 +45,15 @@ type SortDir = 'asc' | 'desc'
 function SkeletonRow() {
   return (
     <tr className="border-b border-[var(--border)]">
-      {[...Array(9)].map((_, i) => (
-        <td key={i} className="px-3 py-3">
-          <div className="h-4 rounded bg-[var(--border)] animate-pulse" style={{ width: i === 1 ? '120px' : '60px' }} />
-        </td>
-      ))}
+      <td className="col-pos px-3 py-3"><div className="h-4 w-6 rounded bg-[var(--border)] animate-pulse" /></td>
+      <td className="col-name px-3 py-3"><div className="h-4 rounded bg-[var(--border)] animate-pulse" style={{ width: '120px' }} /></td>
+      <td className="col-car px-3 py-3"><div className="h-4 w-16 rounded bg-[var(--border)] animate-pulse" /></td>
+      <td className="col-laptime px-3 py-3"><div className="h-4 w-16 rounded bg-[var(--border)] animate-pulse" /></td>
+      <td className="portrait-hidden px-3 py-3"><div className="h-4 w-14 rounded bg-[var(--border)] animate-pulse" /></td>
+      <td className="portrait-hidden px-3 py-3"><div className="h-4 w-14 rounded bg-[var(--border)] animate-pulse" /></td>
+      <td className="portrait-hidden px-3 py-3"><div className="h-4 w-14 rounded bg-[var(--border)] animate-pulse" /></td>
+      <td className="portrait-hidden px-3 py-3"><div className="h-4 w-14 rounded bg-[var(--border)] animate-pulse" /></td>
+      <td className="portrait-hidden px-3 py-3"><div className="h-4 w-10 rounded bg-[var(--border)] animate-pulse" /></td>
     </tr>
   )
 }
@@ -195,11 +199,11 @@ export default function Home() {
 
   const fastest = entries.length > 0 ? entries[0] : null
 
-  function SortHeader({ col, label }: { col: SortKey; label: string }) {
+  function SortHeader({ col, label, className = '' }: { col: SortKey; label: string; className?: string }) {
     const active = sortKey === col
     return (
       <th
-        className="px-3 py-3 text-left text-xs font-semibold uppercase tracking-wider cursor-pointer select-none whitespace-nowrap"
+        className={`px-3 py-3 text-left text-xs font-semibold uppercase tracking-wider cursor-pointer select-none whitespace-nowrap ${className}`}
         style={{ color: active ? 'var(--accent)' : 'var(--fg-muted)' }}
         onClick={() => handleSort(col)}
       >
@@ -346,24 +350,24 @@ export default function Home() {
       {(entries.length > 0 || loading) && (
         <div className="rounded border border-[var(--border)] bg-[var(--bg-card)] overflow-hidden">
           <div className="overflow-x-auto">
-            <table className="w-full text-sm">
+            <table className="w-full text-sm portrait-table">
               <thead className="border-b border-[var(--border)]">
                 <tr>
-                  <SortHeader col="pos" label="#" />
-                  <SortHeader col="name" label="Name" />
+                  <SortHeader col="pos" label="#" className="col-pos" />
+                  <SortHeader col="name" label="Name" className="col-name" />
                   <th
-                    className="px-3 py-3 text-left text-xs font-semibold uppercase tracking-wider cursor-pointer select-none whitespace-nowrap"
+                    className="col-car px-3 py-3 text-left text-xs font-semibold uppercase tracking-wider cursor-pointer select-none whitespace-nowrap"
                     style={{ color: sortKey === 'car' ? 'var(--accent)' : 'var(--fg-muted)' }}
                     onClick={() => handleSort('car')}
                   >
                     Car{sortKey === 'car' && <span className="ml-1">{sortDir === 'asc' ? '↑' : '↓'}</span>}
                   </th>
-                  <SortHeader col="laptime" label="Laptime" />
-                  <SortHeader col="gap" label="Gap" />
-                  <SortHeader col="splitOne" label="S1" />
-                  <SortHeader col="splitTwo" label="S2" />
-                  <SortHeader col="splitThree" label="S3" />
-                  <SortHeader col="ballastKg" label="Ballast" />
+                  <SortHeader col="laptime" label="Laptime" className="col-laptime" />
+                  <SortHeader col="gap" label="Gap" className="portrait-hidden" />
+                  <SortHeader col="splitOne" label="S1" className="portrait-hidden" />
+                  <SortHeader col="splitTwo" label="S2" className="portrait-hidden" />
+                  <SortHeader col="splitThree" label="S3" className="portrait-hidden" />
+                  <SortHeader col="ballastKg" label="Ballast" className="portrait-hidden" />
                 </tr>
               </thead>
               <tbody ref={tableRef}>
@@ -390,36 +394,34 @@ export default function Home() {
                         className="border-b border-[var(--border)] last:border-0 transition-colors"
                         style={{ background: rowBg }}
                       >
-                        <td className="px-3 py-3 font-mono-time font-medium text-[var(--fg-muted)]">
+                        <td className="col-pos px-3 py-3 font-mono-time font-medium text-[var(--fg-muted)]">
                           {entry.pos}
                         </td>
-                        <td className="px-3 py-3 font-medium" style={{ color: isHighlighted ? 'var(--accent)' : 'var(--fg)' }}>
+                        <td className="col-name px-3 py-3 font-medium" style={{ color: isHighlighted ? 'var(--accent)' : 'var(--fg)' }}>
                           {entry.name}
                         </td>
-                        <td className="px-3 py-3">
+                        <td className="col-car px-3 py-3">
                           <CarPill car={entry.car} />
                         </td>
-                        <td className="px-3 py-3 font-mono-time">
+                        <td className="col-laptime px-3 py-3 font-mono-time">
                           {entry.laptime}
                         </td>
-                        {/* Gap — hidden on mobile */}
-                        <td className="px-3 py-3 font-mono-time text-[var(--fg-muted)] hidden sm:table-cell">
+                        <td className="portrait-hidden px-3 py-3 font-mono-time text-[var(--fg-muted)]">
                           {formatGap(gapMs)}
                         </td>
-                        {/* Sectors — hidden on mobile */}
-                        <td className="px-3 py-3 font-mono-time hidden sm:table-cell"
+                        <td className="portrait-hidden px-3 py-3 font-mono-time"
                           style={{ color: s1Ms === bestSectors.s1 ? '#16a34a' : 'var(--fg)', fontWeight: s1Ms === bestSectors.s1 ? 500 : 400 }}>
                           {entry.splitOne}
                         </td>
-                        <td className="px-3 py-3 font-mono-time hidden sm:table-cell"
+                        <td className="portrait-hidden px-3 py-3 font-mono-time"
                           style={{ color: s2Ms === bestSectors.s2 ? '#16a34a' : 'var(--fg)', fontWeight: s2Ms === bestSectors.s2 ? 500 : 400 }}>
                           {entry.splitTwo}
                         </td>
-                        <td className="px-3 py-3 font-mono-time hidden sm:table-cell"
+                        <td className="portrait-hidden px-3 py-3 font-mono-time"
                           style={{ color: s3Ms === bestSectors.s3 ? '#16a34a' : 'var(--fg)', fontWeight: s3Ms === bestSectors.s3 ? 500 : 400 }}>
                           {entry.splitThree}
                         </td>
-                        <td className="px-3 py-3 hidden sm:table-cell">
+                        <td className="portrait-hidden px-3 py-3">
                           <BallastBadge kg={entry.ballastKg} />
                         </td>
                       </tr>

@@ -42,76 +42,82 @@ body {
   }
 }
 
-/* ── Portrait mobile: 3 columns — #, Name+Car stacked, Laptime ── */
-@media screen and (max-width: 767px) and (orientation: portrait) {
-  /* Hide secondary columns */
+/* ── Compact layout: portrait phones (≤640px wide) ── */
+@media screen and (max-width: 640px) {
+  /* Hide S1/S2/S3/Ballast */
   .portrait-hidden {
     display: none !important;
   }
 
-  /* Hide the standalone car column in portrait — car moves inline */
+  /* Hide standalone car column — pill moves inside name cell */
   .col-car {
     display: none !important;
   }
 
-  /* Show the inline car pill (inside name cell) only in portrait */
+  /* Show inline car pill below the name */
   .car-inline {
     display: block !important;
   }
 
-  /* Fixed 3-column layout fills the full screen width */
+  /* Fixed layout so columns fill exact screen width */
   .portrait-table {
     table-layout: fixed;
     width: 100%;
   }
-  .portrait-table .col-pos     { width: 36px; }
-  .portrait-table .col-name    { /* auto — takes remaining width */ }
-  .portrait-table .col-laptime { width: 80px; }
-  .portrait-table .col-gap     { width: 56px; }
 
-  /* Tighten cell padding */
+  /*
+   * On a 390px screen, container px-4 = 32px → table = 358px.
+   * Each cell has 8px padding each side (16px total).
+   * 4 cells × 16px = 64px padding budget.
+   * col-pos 32px + col-laptime 84px + col-gap 64px = 180px fixed.
+   * col-name gets 358 − 180 = 178px → enough for long names.
+   */
+  .portrait-table .col-pos     { width: 32px; }
+  .portrait-table .col-laptime { width: 84px; }
+  .portrait-table .col-gap     { width: 64px; }
+  /* col-name: auto — browser gives it the rest */
+
+  /* Tighten horizontal padding for all cells */
   .portrait-table th,
   .portrait-table td {
     padding-left: 8px;
     padding-right: 8px;
   }
 
-  /* Name cell: clip overflow, let inner flex handle layout */
+  /* col-name: prevent expansion, clip text */
   .portrait-table .col-name {
     overflow: hidden;
-    max-width: 0; /* required for text-overflow in table-fixed */
-  }
-
-  /* Name text truncates, car pill wraps below */
-  .name-cell-inner {
-    display: flex;
-    flex-direction: column;
-    gap: 3px;
-    overflow: hidden;
-  }
-  .name-cell-inner .name-text {
-    overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: nowrap;
+    max-width: 0; /* trick that makes text-overflow work in fixed tables */
   }
 }
 
-/* ── Landscape mobile + tablet/desktop: all columns visible ── */
-@media screen and (orientation: landscape),
-       screen and (min-width: 768px) {
+/* ── Full layout: landscape phones + tablets + desktop (≥641px) ── */
+@media screen and (min-width: 641px) {
   .portrait-hidden {
     display: table-cell !important;
   }
   .col-car {
     display: table-cell !important;
   }
-  /* Hide the inline car pill — car is in its own column */
   .car-inline {
     display: none !important;
   }
 }
 
-/* Default: hide car-inline (landscape/desktop default) */
+/* Default: hide inline pill (overridden to block in compact media query) */
 .car-inline {
   display: none;
+}
+
+/* Name cell inner layout — active in compact mode via .name-cell-inner */
+.name-cell-inner {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  overflow: hidden;
+}
+.name-cell-inner .name-text {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }

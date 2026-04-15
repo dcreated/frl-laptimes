@@ -77,8 +77,8 @@ body {
    * col-name gets 358 − 180 = 178px → enough for long names.
    */
   .portrait-table .col-pos     { width: 32px; }
-  .portrait-table .col-laptime { width: 84px; }
-  .portrait-table .col-gap     { width: 64px; }
+  .portrait-table .col-laptime { width: 80px; }
+  .portrait-table .col-gap     { width: 78px; }
   /* col-name: auto — browser gives it the rest */
 
   /* Tighten horizontal padding for all cells */

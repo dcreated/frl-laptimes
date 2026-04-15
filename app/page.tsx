@@ -336,7 +336,7 @@ export default function Home() {
 
       {/* KPI bar */}
       {(entries.length > 0 || loading) && (
-        <div className="grid grid-cols-3 gap-2 sm:gap-3 mb-6">
+        <div className="grid gap-2 sm:gap-3 mb-6" style={{ gridTemplateColumns: '1fr 1fr auto' }}>
           {[
             {
               label: 'Fastest lap',

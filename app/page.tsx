@@ -336,7 +336,7 @@ export default function Home() {
 
       {/* KPI bar */}
       {(entries.length > 0 || loading) && (
-        <div className="grid grid-cols-3 gap-3 mb-6">
+        <div className="grid grid-cols-3 gap-2 sm:gap-3 mb-6">
           {[
             {
               label: 'Fastest lap',
@@ -359,16 +359,16 @@ export default function Home() {
           ].map(card => (
             <div
               key={card.label}
-              className="rounded border border-[var(--border)] bg-[var(--bg-card)] px-4 py-3"
+              className="rounded border border-[var(--border)] bg-[var(--bg-card)] px-2 py-2 sm:px-4 sm:py-3 overflow-hidden min-w-0"
             >
-              <p className="text-xs uppercase tracking-wider text-[var(--fg-muted)] mb-1" style={{ fontFamily: 'var(--font-barlow, sans-serif)' }}>
+              <p className="text-[10px] sm:text-xs uppercase tracking-wide text-[var(--fg-muted)] mb-1 truncate" style={{ fontFamily: 'var(--font-barlow, sans-serif)' }}>
                 {card.label}
               </p>
               {loading ? (
-                <div className="h-6 w-24 rounded bg-[var(--border)] animate-pulse" />
+                <div className="h-5 w-full rounded bg-[var(--border)] animate-pulse" />
               ) : (
                 <p
-                  className={`text-xl font-semibold ${card.mono ? 'font-mono-time' : ''}`}
+                  className={`text-base sm:text-xl font-semibold truncate ${card.mono ? 'font-mono-time' : ''}`}
                   style={{ color: card.accent ? 'var(--accent)' : 'var(--fg)' }}
                 >
                   {card.value}
